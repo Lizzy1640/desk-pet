@@ -11,36 +11,37 @@ normal = Vector2(-1, 0)
 normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ox5hf"]
+normal = Vector2(0, 1)
 
 [node name="Game" type="Node2D"]
 
-[node name="Pet" parent="." instance=ExtResource("1_xxa2h")]
-position = Vector2(100, -1)
-
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(166, -93)
 zoom = Vector2(3.5, 3.5)
 
 [node name="Dock" type="StaticBody2D" parent="."]
-position = Vector2(126, 1)
+position = Vector2(0, 240)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dock"]
 shape = SubResource("WorldBoundaryShape2D_xxa2h")
 
 [node name="RightWall" type="StaticBody2D" parent="."]
-position = Vector2(331, 0)
+position = Vector2(420, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 position = Vector2(1, 0)
 shape = SubResource("WorldBoundaryShape2D_7gre8")
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-420, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource("WorldBoundaryShape2D_81rff")
 
 [node name="Ceiling" type="StaticBody2D" parent="."]
-position = Vector2(126, -187)
+position = Vector2(0, -240)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
 shape = SubResource("WorldBoundaryShape2D_ox5hf")
+
+[node name="Pet" parent="." instance=ExtResource("1_xxa2h")]
+position = Vector2(-149, 218)

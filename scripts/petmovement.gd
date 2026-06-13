@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-
 const SPEED := 60.0 # float
 var direction := 1 #int
 var is_dragging := false # boolean
-var initial_posit := Vector2.ZERO # idk tbh
+var mouse_offset := Vector2.ZERO # idk tbh
+var is_mouse_inside := false
 
 @onready var collider = $CollisionShape2D
 @onready var ray_cast_right: RayCast2D = $RayCastRight
@@ -12,9 +12,29 @@ var initial_posit := Vector2.ZERO # idk tbh
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	_fall(delta)
-	_walk()
+	if is_dragging:
+		position = get_global_mouse_position() + mouse_offset
+	else:
+		_fall(delta)
+		#_walk()
+	
+
+func _on_mouse_entered() -> void:
+	is_mouse_inside = true
+	print("in")
+func _on_mouse_exited() -> void:
+	is_mouse_inside = false
+	print("not in")
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button.index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed() and is_mouse_inside:
+			is_dragging = true
+			print("dragging")
+			mouse_offset = position - get_global_mouse_position()
+		else:
+			is_dragging = false
+			print("done dragging")
 	
 
 func _walk():
@@ -29,13 +49,8 @@ func _fall(delta: float):
 	# need to get the x and y velocity of mouse
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	position.x += direction * SPEED * delta
+	#position.x += direction * SPEED * delta
 
-func _click_and_drag(event: InputEvent) -> void:
-	#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		#if event.is_pressed():
-			
-		#elif event.is_released():
-			
+
 
 	move_and_slide()

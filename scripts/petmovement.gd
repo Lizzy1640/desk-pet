@@ -11,6 +11,15 @@ var is_mouse_inside := false
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
+func _ready() -> void:
+	var size = DisplayServer.screen_get_size()
+	print(size)
+	DisplayServer.window_set_size(size)
+	
+	# get_window().mouse_passthrough = true
+	# ^ lets mouse click on stuff behind game window
+	# but game window gets covered by clicked on window
+
 func _physics_process(delta: float) -> void:
 	if is_dragging:
 		position = get_global_mouse_position() + mouse_offset

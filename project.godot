@@ -17,13 +17,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/mode=2
 window/size/resizable=false
-window/size/borderless=true
-window/size/transparent=true
-window/per_pixel_transparency/allowed=true
+window/subwindows/embed_subwindows=false
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-viewport/transparent_background=true

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://c5d38whx53h7h"]
 
-[ext_resource type="PackedScene" uid="uid://wp3a4sitwrln" path="res://scenes/pet.tscn" id="1_xxa2h"]
+[ext_resource type="PackedScene" uid="uid://dtmsqvglwdnmg" path="res://scenes/pet_window.tscn" id="1_xxa2h"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xxa2h"]
 
@@ -44,4 +44,4 @@ position = Vector2(0, -240)
 shape = SubResource("WorldBoundaryShape2D_ox5hf")
 
 [node name="Pet" parent="." instance=ExtResource("1_xxa2h")]
-position = Vector2(-149, 218)
+position = Vector2(51, -28)

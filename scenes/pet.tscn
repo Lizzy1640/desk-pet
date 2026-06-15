@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://wp3a4sitwrln"]
+[gd_scene load_steps=8 format=3 uid="uid://wp3a4sitwrln"]
 
-[ext_resource type="Script" uid="uid://c0dexmfdcxe1t" path="res://scripts/petmovement.gd" id="1_8wqpi"]
 [ext_resource type="Texture2D" uid="uid://81rdrtg501qf" path="res://assets/Eris Esra's 16x32/16x32 Walk-Sheet.png" id="1_mdqe4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8wqpi"]
@@ -43,7 +42,6 @@ animations = [{
 radius = 6.0
 
 [node name="Pet" type="CharacterBody2D"]
-script = ExtResource("1_8wqpi")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)

@@ -58,7 +58,7 @@ func _fall(delta: float):
 	# need to get the x and y velocity of mouse
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-	#position.x += direction * SPEED * delta
+	position.x += direction * SPEED * delta
 
 
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5d38whx53h7h"]
+[gd_scene load_steps=7 format=3 uid="uid://c5d38whx53h7h"]
 
-[ext_resource type="PackedScene" uid="uid://dtmsqvglwdnmg" path="res://scenes/pet_window.tscn" id="1_xxa2h"]
+[ext_resource type="Script" uid="uid://c5xoshmeqj00w" path="res://scripts/main.gd" id="1_7gre8"]
+[ext_resource type="PackedScene" uid="uid://wp3a4sitwrln" path="res://scenes/pet.tscn" id="2_81rff"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xxa2h"]
 
@@ -14,34 +15,36 @@ normal = Vector2(1, 0)
 normal = Vector2(0, 1)
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_7gre8")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.5, 3.5)
+[node name="Barriers" type="Node" parent="."]
 
-[node name="Dock" type="StaticBody2D" parent="."]
+[node name="Dock" type="StaticBody2D" parent="Barriers"]
 position = Vector2(0, 240)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dock"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers/Dock"]
 shape = SubResource("WorldBoundaryShape2D_xxa2h")
 
-[node name="RightWall" type="StaticBody2D" parent="."]
+[node name="RightWall" type="StaticBody2D" parent="Barriers"]
 position = Vector2(420, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers/RightWall"]
 position = Vector2(1, 0)
 shape = SubResource("WorldBoundaryShape2D_7gre8")
 
-[node name="LeftWall" type="StaticBody2D" parent="."]
+[node name="LeftWall" type="StaticBody2D" parent="Barriers"]
 position = Vector2(-420, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers/LeftWall"]
 shape = SubResource("WorldBoundaryShape2D_81rff")
 
-[node name="Ceiling" type="StaticBody2D" parent="."]
+[node name="Ceiling" type="StaticBody2D" parent="Barriers"]
 position = Vector2(0, -240)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barriers/Ceiling"]
 shape = SubResource("WorldBoundaryShape2D_ox5hf")
 
-[node name="Pet" parent="." instance=ExtResource("1_xxa2h")]
-position = Vector2(51, -28)
+[node name="Pet" parent="." instance=ExtResource("2_81rff")]
+position = Vector2(20, 2)
+
+[node name="Camera2D" type="Camera2D" parent="Pet"]

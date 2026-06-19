@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5d38whx53h7h"]
+[gd_scene load_steps=6 format=3 uid="uid://c5d38whx53h7h"]
 
-[ext_resource type="Script" uid="uid://c5xoshmeqj00w" path="res://scripts/main.gd" id="1_7gre8"]
 [ext_resource type="PackedScene" uid="uid://wp3a4sitwrln" path="res://scenes/pet.tscn" id="2_81rff"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_xxa2h"]
@@ -15,7 +14,9 @@ normal = Vector2(1, 0)
 normal = Vector2(0, 1)
 
 [node name="Game" type="Node2D"]
-script = ExtResource("1_7gre8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.3, 1.3)
 
 [node name="Barriers" type="Node" parent="."]
 
@@ -46,5 +47,3 @@ shape = SubResource("WorldBoundaryShape2D_ox5hf")
 
 [node name="Pet" parent="." instance=ExtResource("2_81rff")]
 position = Vector2(20, 2)
-
-[node name="Camera2D" type="Camera2D" parent="Pet"]

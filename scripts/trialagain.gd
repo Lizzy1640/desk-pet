@@ -42,11 +42,6 @@ func _ready() -> void:
 	# put pet on floor
 	window.position = Vector2i(2000, target_y)
 	
-	# run once at start
-	_update_mouse_mask()
-	
-	# connect that signal: update mask each frame
-	$AnimatedSprite2D.frame_changed.connect(_update_mouse_mask)
 	$AnimatedSprite2D.play("walk")
 
 func _process(_delta: float) -> void:
@@ -59,7 +54,7 @@ func _process(_delta: float) -> void:
 	var move_vector = Vector2i(direction * move_speed)
 	
 	# apply it to the OS window
-	#window.position += move_vector
+	window.position += move_vector
 	
 	# the safe zone: screen area minus taskbars/docks
 	var usable_rect = DisplayServer.screen_get_usable_rect()

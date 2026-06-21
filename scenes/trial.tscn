@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://3ru37ggst7po"]
 
 [ext_resource type="Texture2D" uid="uid://dtq8v453432lf" path="res://assets/Eris Esra's 16x32/16x32 Idle-Sheet.png" id="1_bixk8"]
-[ext_resource type="Script" uid="uid://chjms7j2e3th0" path="res://scripts/trial.gd" id="1_r0yyb"]
+[ext_resource type="Script" uid="uid://b5ncx1ubo7nyq" path="res://scripts/trialagain.gd" id="1_r0yyb"]
 [ext_resource type="Texture2D" uid="uid://81rdrtg501qf" path="res://assets/Eris Esra's 16x32/16x32 Walk-Sheet.png" id="2_r0yyb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c5r58"]
@@ -77,7 +77,7 @@ animations = [{
 script = ExtResource("1_r0yyb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(96.00001, 96.00001)
+position = Vector2(96, 96)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_0afln")
 animation = &"walk"

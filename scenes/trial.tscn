@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://3ru37ggst7po"]
+
+[ext_resource type="Texture2D" uid="uid://dtq8v453432lf" path="res://assets/Eris Esra's 16x32/16x32 Idle-Sheet.png" id="1_bixk8"]
+[ext_resource type="Script" uid="uid://chjms7j2e3th0" path="res://scripts/trial.gd" id="1_r0yyb"]
+[ext_resource type="Texture2D" uid="uid://81rdrtg501qf" path="res://assets/Eris Esra's 16x32/16x32 Walk-Sheet.png" id="2_r0yyb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5r58"]
+atlas = ExtResource("1_bixk8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jv6j4"]
+atlas = ExtResource("1_bixk8")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7j56"]
+atlas = ExtResource("1_bixk8")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3dhd6"]
+atlas = ExtResource("1_bixk8")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e3lha"]
+atlas = ExtResource("2_r0yyb")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybws8"]
+atlas = ExtResource("2_r0yyb")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf0si"]
+atlas = ExtResource("2_r0yyb")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7mso"]
+atlas = ExtResource("2_r0yyb")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0afln"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5r58")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jv6j4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7j56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3dhd6")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e3lha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybws8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf0si")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7mso")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="trial" type="Node2D"]
+script = ExtResource("1_r0yyb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(96.00001, 96.00001)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_0afln")
+animation = &"walk"
+autoplay = "walk"
+frame = 2
+frame_progress = 0.6629893

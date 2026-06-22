@@ -1,8 +1,9 @@
 extends Node2D
 
 var move_speed = 4
-var direction = Vector2(1, 0) # moving on x axis
+var direction = Vector2(1, 1) # moving on both axis
 var is_idle = false
+var action_num = -1
 
 func _input(event: InputEvent) -> void:
 	# check for a click (left mouse button)
@@ -21,6 +22,8 @@ func start_idle():
 	$AnimatedSprite2D.play("walk")
 
 func _ready() -> void:
+	randomize()
+	
 	# get access to the actual OS window (not just the game node)
 	var window = get_window()
 	
@@ -42,7 +45,7 @@ func _ready() -> void:
 	# put pet on floor
 	window.position = Vector2i(2000, target_y)
 	
-	$AnimatedSprite2D.play("walk")
+	$AnimatedSprite2D.play("idle")
 
 func _process(_delta: float) -> void:
 	if is_idle:
@@ -54,7 +57,7 @@ func _process(_delta: float) -> void:
 	var move_vector = Vector2i(direction * move_speed)
 	
 	# apply it to the OS window
-	window.position += move_vector
+	#window.position += move_vector
 	
 	# the safe zone: screen area minus taskbars/docks
 	var usable_rect = DisplayServer.screen_get_usable_rect()
@@ -63,34 +66,56 @@ func _process(_delta: float) -> void:
 	# if right side of our window > right side of the screen
 	if window.position.x + window.size.x > usable_rect.end.x:
 		direction.x = -1
-		$AnimatedSprite2D.flip_h = true
 	elif window.position.x < usable_rect.position.x:
 		direction.x = 1
+	
+	# check if hitting floor or ceiling
+	if window.position.y + window.size.y > usable_rect.end.y:
+		direction.y = -1
+	elif window.position.y < usable_rect.position.y:
+		direction.y = 1
+	
+	if direction.x == -1:
+		$AnimatedSprite2D.flip_h = true
+	else: # direction == 1
 		$AnimatedSprite2D.flip_h = false
 	
+	match action_num:
+		0: # idle
+			$AnimatedSprite2D.play("idle")
+		1: # dance
+			$AnimatedSprite2D.play("dance")
+		2: # spin
+			$AnimatedSprite2D.play("spin")
+		3: # jump in place
+			$AnimatedSprite2D.play("jump")
+		4, 5, 6, 7: # walk
+			$AnimatedSprite2D.play("walk")
+			window.position += move_vector
+	
 
-func _update_mouse_mask():
-	var anim = $AnimatedSprite2D
-	
-	# get raw image data of current sprite frame
-	var texture = anim.sprite_frames.get_frame_texture(anim.animation, anim.frame)
-	var image = texture.get_image()
-	
-	# flip image data manually
-	if anim.flip_h:
-		image.flip_x()
-	
-	# create bit map (solid pixels)
-	var bitmap = BitMap.new()
-	bitmap.create_from_image_alpha(image)
-	
-	# create polygon shape around sprite frame
-	# (0.1 means ignore transparent pixels)
-	var polygons = bitmap.opaque_to_polygons(Rect2(Vector2.ZERO, texture.get_size()), 0.1)
-	
-	# apply to OS window
-	# basically like a collider, only accepts mouse
-	# events inside this shape
-	DisplayServer.window_set_mouse_passthrough(polygons)
-	print("    Start: ", polygons)
-	
+func action_rand():
+	return randi() % 8  # 0 - 5 (6) actions
+
+func time_rand():
+	return randi() % 5 + 5  # 5 to 10 secs
+
+func direction_rand():
+	# -1, 0, 1
+	var dir_x = action_rand() % 3 - 1
+	var dir_y = 0
+	if dir_x != 0:
+		dir_y = time_rand() % 3 - 1
+	else:
+		dir_y = time_rand() % 2
+		if dir_y == 0:
+			dir_y = -1
+	return Vector2i(dir_x, dir_y)
+
+func _on_timer_timeout() -> void:
+	# switch action and reset timer
+	action_num = action_rand()
+	direction = direction_rand()
+	var time = time_rand()
+	print("reset: ", action_num, ", ", direction, ", ", time, "secs")
+	$Timer.start(time)

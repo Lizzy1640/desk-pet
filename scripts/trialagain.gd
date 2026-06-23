@@ -84,12 +84,8 @@ func _process(_delta: float) -> void:
 		0: # idle
 			$AnimatedSprite2D.play("idle")
 		1: # dance
-			$AnimatedSprite2D.play("dance")
-		2: # spin
 			$AnimatedSprite2D.play("spin")
-		3: # jump in place
-			$AnimatedSprite2D.play("jump")
-		4, 5, 6, 7: # walk
+		2, 3, 4, 5: # walk
 			$AnimatedSprite2D.play("walk")
 			window.position += move_vector
 	
@@ -112,10 +108,31 @@ func direction_rand():
 			dir_y = -1
 	return Vector2i(dir_x, dir_y)
 
+func direction_change():
+	var change = randi() % 2
+	if change == 0:
+		change = -1
+	
+	if direction.x == 0 or direction.y == 0:
+		if direction.x == 0:
+			direction.x = change
+		else:
+			direction.y = change
+	else: # x or y == 1, -1
+		if change == 1:
+			direction.x = 0
+		else:
+			direction.y = 0
+	return randi() % 3 + 2
+
 func _on_timer_timeout() -> void:
 	# switch action and reset timer
 	action_num = action_rand()
-	direction = direction_rand()
+	#direction = direction_rand()
 	var time = time_rand()
 	print("reset: ", action_num, ", ", direction, ", ", time, "secs")
-	$Timer.start(time)
+	$ActionTimer.start(time)
+
+func _on_change_timer_timeout() -> void:
+	print("dir: ", direction)
+	$ChangeTimer.start(direction_change())

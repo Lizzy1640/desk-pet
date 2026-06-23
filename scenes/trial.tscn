@@ -280,7 +280,12 @@ sprite_frames = SubResource("SpriteFrames_ybws8")
 animation = &"spin"
 frame_progress = 0.14286798
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ActionTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="ChangeTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ChangeTimer" to="." method="_on_change_timer_timeout"]
